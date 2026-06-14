@@ -1,0 +1,36 @@
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules/
+/frontend/node_modules/
+/backend/node_modules/
+
+# Production build outputs
+dist/
+dist-ssr/
+/frontend/dist/
+/frontend/dist-ssr/
+
+# Backend generated run directories
+/backend/runs/
+
+# Local env files
+*.local
+.env
+.env.*
+
+# OS and Editor files
+.DS_Store
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
