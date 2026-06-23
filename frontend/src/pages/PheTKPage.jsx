@@ -13,7 +13,28 @@ const PHETK_TEMPLATES = [
     name: "1. Built-in Demo",
     tag: "PheTK Demo",
     desc: "Import and execute the package quick start demo routine to verify environments.",
-    code: `# PheTK Built-in Demo
+    code: `# PheTK Built-in Demo (Non-Interactive)
+# Since the server environment does not have an interactive terminal,
+# we mock the input() function to auto-answer the demo's configuration prompts.
+import builtins
+
+demo_answers = [
+    "",          # Welcome screen: Press Enter
+    "binary",    # Variable type: binary or continuous
+    "yes",       # Include both sexes: yes or no
+    "",          # Cohort preview: Press Enter
+    "",          # Count preview: Press Enter
+    "",          # Run PheWAS: Press Enter
+]
+
+def automated_input(prompt=""):
+    print(prompt)
+    answer = demo_answers.pop(0) if demo_answers else ""
+    print(f">> Automatically answered: {answer}\\n")
+    return answer
+
+builtins.input = automated_input
+
 from phetk import demo
 demo.run()
 `

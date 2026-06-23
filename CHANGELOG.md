@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.1] - 2026-06-23
+
+### Security
+- Restricted CORS configuration in Express server to only allow the frontend origin to prevent cross-site remote code execution.
+- Added a 10-second script execution timeout for running Python code to prevent infinite loop resource exhaustion.
+- Configured backend Docker container to run as a non-privileged `appuser` system user.
+
+### Fixed
+- Mocked Python's standard `input()` prompts in the PheTK "Built-in Demo" to run non-interactively, resolving execution hangs and timeouts.
+
 ## [0.2.0] - 2026-06-23
 
 ### Added

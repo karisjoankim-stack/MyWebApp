@@ -27,9 +27,18 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
+# Create a non-root system user
+RUN useradd -u 8888 -m appuser
+
 # Copy application files
 COPY . .
 
+# Adjust permissions for non-root user
+RUN chown -R appuser:appuser /app
+
 EXPOSE 3002
+
+# Run as non-root user
+USER appuser
 
 CMD ["node", "index.js"]

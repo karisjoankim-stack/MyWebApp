@@ -6,7 +6,10 @@ const fs = require('fs/promises');
 const path = require('path');
 
 const app = express();
-app.use(cors());
+const ALLOWED_ORIGIN = process.env.FRONTEND_URL || 'http://localhost:5180';
+app.use(cors({
+  origin: ALLOWED_ORIGIN
+}));
 app.use(express.json());
 
 const RUNS_DIR = path.join(__dirname, 'runs');
@@ -34,11 +37,21 @@ app.post('/api/run', async (req, res) => {
     const scriptPath = path.join(runDir, 'main.py');
     await fs.writeFile(scriptPath, code);
 
-    // Execute script
+    // Execute script with a 10-second timeout to prevent infinite loops
     const startTime = process.hrtime();
-    exec('python3 main.py', { cwd: runDir }, async (error, stdout, stderr) => {
+    exec('python3 main.py', { 
+      cwd: runDir,
+      timeout: 10000, // 10 seconds limit
+      killSignal: 'SIGTERM'
+    }, async (error, stdout, stderr) => {
       const diff = process.hrtime(startTime);
       const executionTimeMs = Math.round((diff[0] * 1e9 + diff[1]) / 1e6);
+
+      // Append custom error message if execution was killed by a timeout
+      let customStderr = stderr;
+      if (error && error.signal === 'SIGTERM') {
+        customStderr += '\n[Execution Error: Script exceeded the 10-second timeout limit and was terminated.]';
+      }
       const exitCode = error ? error.code : 0;
 
       // Save metadata
@@ -69,7 +82,7 @@ app.post('/api/run', async (req, res) => {
         res.json({
           runId,
           stdout,
-          stderr,
+          stderr: customStderr,
           mediaFiles: mediaUrls,
           exitCode,
           executionTimeMs
