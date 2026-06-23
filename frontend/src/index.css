@@ -793,7 +793,7 @@ a {
 /* Dashboard & Learn Section */
 .dashboard-grid {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
   gap: 2rem;
   width: 100%;
   max-width: 1100px;
@@ -816,6 +816,8 @@ a {
   display: flex;
   flex-direction: column;
   height: 480px;
+  min-width: 0;
+  width: 100%;
 }
 
 .section-header {
@@ -845,7 +847,9 @@ a {
 .scroll-container {
   flex: 1;
   overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 0.25rem;
+  width: 100%;
 }
 
 /* Lesson Cards */
@@ -923,6 +927,8 @@ a {
   margin-bottom: 0.6rem;
   cursor: pointer;
   transition: all 0.2s;
+  min-width: 0;
+  width: 100%;
 }
 
 .history-item:hover {
@@ -958,6 +964,8 @@ a {
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 0.15rem;
+  min-width: 0;
+  flex: 1;
 }
 
 .history-time-info {
@@ -1172,6 +1180,8 @@ a {
   display: flex;
   flex-direction: column;
   height: 380px;
+  min-width: 0;
+  width: 100%;
 }
 
 .neomorphic-panel .section-header {

@@ -216,7 +216,7 @@ export default function LandingPage() {
         </div>
 
         {/* Dashboard Grid (Lessons & History) */}
-        <div className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', marginTop: '1rem', width: '100%' }}>
+        <div className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1fr)', gap: '2rem', marginTop: '1rem', width: '100%' }}>
           {/* Learn Python Section */}
           <div className="section-container neomorphic-panel">
             <div className="section-header" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', paddingBottom: '0.5rem' }}>
@@ -264,7 +264,7 @@ export default function LandingPage() {
                     <div 
                       key={run.runId} 
                       className="history-item neomorphic-item-button"
-                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 0.9rem', marginBottom: '0.6rem' }}
+                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 0.9rem', marginBottom: '0.6rem', minWidth: 0, width: '100%' }}
                       onClick={() => navigate('/runner', { state: { code: run.code } })}
                       title="Click to reload this script in the editor"
                     >
@@ -276,7 +276,7 @@ export default function LandingPage() {
                             <XCircle size={14} color="#ef4444" />
                           )}
                         </div>
-                        <span className="history-code-preview" style={{ fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontFamily: 'var(--font-mono)' }}>
+                        <span className="history-code-preview" style={{ fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontFamily: 'var(--font-mono)', minWidth: 0, flex: 1 }}>
                           {run.code.trim().split('\n')[0] || 'untitled.py'}
                         </span>
                       </div>
