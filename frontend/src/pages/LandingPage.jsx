@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { 
-  Play, Code2, Terminal, Image as ImageIcon, Video, ArrowRight,
+  Play, Code2, Terminal, Image as ImageIcon, Dna,
   BookOpen, History, CheckCircle, XCircle, Clock
 } from 'lucide-react';
 
@@ -92,7 +92,7 @@ print("\\nHigh Achievers:\\n", high_achievers.to_string(index=False))
 
 const highlightPython = (codeText) => {
   if (!codeText) return '';
-  const lines = codeText.split('\n');
+  const lines = codeText.split('\n').slice(0, 20);
   return lines.map((line, lineIndex) => {
     const commentIndex = line.indexOf('#');
     let codePart = line;
@@ -148,12 +148,12 @@ export default function LandingPage() {
   const [loadingHistory, setLoadingHistory] = useState(true);
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/recent-code')
+    fetch('http://localhost:3002/api/recent-code')
       .then(res => res.json())
       .then(data => setRecentCode(data.code))
       .catch(err => setRecentCode('# Failed to load recent code'));
 
-    fetch('http://localhost:3001/api/history')
+    fetch('http://localhost:3002/api/history')
       .then(res => res.json())
       .then(data => {
         setHistory(data);
@@ -166,142 +166,154 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="landing-container">
-      <div className="landing-content animate-fade-in">
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.5rem' }}>
-          <div className="feature-icon-wrapper" style={{ width: '56px', height: '56px', borderRadius: '12px' }}>
-            <Code2 size={32} />
+    <div className="landing-split-container">
+      {/* Left Pane: Brand & Control Area */}
+      <div className="left-pane animate-slide-in">
+        <div className="brand-header">
+          <div className="neomorphic-logo">
+            <Code2 size={22} color="#3b82f6" />
           </div>
-        </div>
-        <h1 className="hero-title">Python Script<br />Runner Playground</h1>
-        <p className="hero-subtitle">
-          Active Python development environment.
-        </p>
-
-        {/* Floating Code Preview Card */}
-        <div className="code-preview-card">
-          <div className="code-preview-header">
-            <div className="dots">
-              <span className="dot dot-red"></span>
-              <span className="dot dot-yellow"></span>
-              <span className="dot dot-green"></span>
-            </div>
-            <span className="preview-title">preview</span>
-          </div>
-          <div className="code-preview-body">
-            <pre style={{ margin: 0, padding: 0, background: 'transparent', color: '#e2e8f0', fontFamily: 'var(--font-mono)', whiteSpace: 'pre-wrap', fontSize: '0.85rem', lineHeight: '1.6' }}>
-              <code>{highlightPython(recentCode)}</code>
-            </pre>
-          </div>
+          <span className="brand-name">Antigravity</span>
         </div>
 
-        <div style={{ display: 'flex', gap: '1.25rem', justifyContent: 'center', marginTop: '2rem' }}>
-          <button className="btn btn-primary" onClick={() => navigate('/runner')}>
-            <Play size={18} /> Launch Editor <ArrowRight size={16} />
+        <div className="hero-section">
+          <h1 className="hero-title">Python Script<br />Runner Playground</h1>
+          <p className="hero-subtitle">
+            A clean, modern development environment for learning, executing, and visualizing Python scripts.
+          </p>
+        </div>
+
+        {/* Primary Action Buttons */}
+        <div className="actions-container">
+          <button className="neumorphic-btn btn-primary" onClick={() => navigate('/runner')}>
+            <Play size={18} /> Launch Editor
+          </button>
+          <button className="neumorphic-btn btn-secondary" onClick={() => navigate('/phetk')}>
+            <Dna size={18} /> PheTK Analysis
           </button>
         </div>
 
-        {/* Features Grid */}
-        <div className="features-section">
-          <div className="feature-card">
+        {/* Features list */}
+        <div className="neomorphic-features">
+          <div className="neomorphic-feature-card">
             <div className="feature-icon-wrapper">
-              <Terminal size={20} />
+              <Terminal size={18} />
             </div>
-            <h3 className="feature-title">Raw execution</h3>
-            <p className="feature-desc">See immediate stdout and stderr logs in a specialized high-contrast developer console.</p>
+            <div className="feature-info">
+              <h4 className="feature-title">Raw Execution</h4>
+              <p className="feature-desc">Immediate stdout/stderr logs in a specialized developer console.</p>
+            </div>
           </div>
-
-          <div className="feature-card">
+          <div className="neomorphic-feature-card">
             <div className="feature-icon-wrapper">
-              <ImageIcon size={20} />
+              <ImageIcon size={18} />
             </div>
-            <h3 className="feature-title">Data Plotting</h3>
-            <p className="feature-desc">Generate plots with matplotlib and save as PNG. They automatically render in the Plots tab.</p>
-          </div>
-
-          <div className="feature-card">
-            <div className="feature-icon-wrapper">
-              <Video size={20} />
+            <div className="feature-info">
+              <h4 className="feature-title">Data Plotting</h4>
+              <p className="feature-desc">Generate plots with matplotlib and save as PNG to automatically render.</p>
             </div>
-            <h3 className="feature-title">MP4 Animations</h3>
-            <p className="feature-desc">Generate videos and play them back dynamically inside the high-performance media wrapper.</p>
           </div>
         </div>
 
-        {/* Dashboard and Learn Sections */}
-        <div className="dashboard-grid">
-          {/* Left Column: Learn Python */}
-          <div className="section-container">
-            <div className="section-header">
-              <BookOpen size={20} color="var(--accent)" />
-              <span className="section-title">Learn Python Interactive</span>
+        {/* Dashboard Grid (Lessons & History) */}
+        <div className="dashboard-grid" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '2rem', marginTop: '1rem', width: '100%' }}>
+          {/* Learn Python Section */}
+          <div className="section-container neomorphic-panel">
+            <div className="section-header" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', paddingBottom: '0.5rem' }}>
+              <BookOpen size={18} color="#3b82f6" />
+              <span className="section-title" style={{ fontSize: '1rem', fontWeight: '700' }}>Learn Python Interactive</span>
             </div>
-            <div className="section-subtitle">Select a topic below to load its exercise and write code in the playground editor.</div>
+            <div className="section-subtitle" style={{ fontSize: '0.75rem', marginBottom: '1rem' }}>Select a topic below to load its exercise and write code in the playground editor.</div>
             <div className="scroll-container">
               {LESSONS.map((lesson) => (
                 <div 
                   key={lesson.id} 
-                  className="lesson-card"
+                  className="lesson-card neomorphic-item-button"
+                  style={{ padding: '0.9rem', marginBottom: '0.75rem' }}
                   onClick={() => navigate('/runner', { state: { code: lesson.code } })}
                 >
-                  <div className="lesson-title-bar">
-                    <span className="lesson-name">{lesson.name}</span>
-                    <span className="lesson-tag">{lesson.tag}</span>
+                  <div className="lesson-title-bar" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.35rem' }}>
+                    <span className="lesson-name" style={{ fontSize: '0.85rem', fontWeight: '600' }}>{lesson.name}</span>
+                    <span className="lesson-tag" style={{ fontSize: '0.65rem', padding: '0.15rem 0.4rem', borderRadius: '4px', background: 'rgba(59, 130, 246, 0.1)', color: '#3b82f6' }}>{lesson.tag}</span>
                   </div>
-                  <div className="lesson-desc">{lesson.desc}</div>
+                  <div className="lesson-desc" style={{ fontSize: '0.75rem', lineHeight: '1.3' }}>{lesson.desc}</div>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right Column: Run History Dashboard */}
-          <div className="section-container">
-            <div className="section-header">
-              <History size={20} color="var(--primary)" />
-              <span className="section-title">Your Execution History</span>
+          {/* Execution History Section */}
+          <div className="section-container neomorphic-panel">
+            <div className="section-header" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.75rem', paddingBottom: '0.5rem' }}>
+              <History size={18} color="#10b981" />
+              <span className="section-title" style={{ fontSize: '1rem', fontWeight: '700' }}>Execution History</span>
             </div>
-            <div className="section-subtitle">Quickly reload or review your most recent execution runs and their performance.</div>
+            <div className="section-subtitle" style={{ fontSize: '0.75rem', marginBottom: '1rem' }}>Review or reload your most recent execution runs and their performance.</div>
             <div className="scroll-container">
               {loadingHistory ? (
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', padding: '1rem 0' }}>Loading history...</div>
+                <div style={{ fontSize: '0.8rem', padding: '1rem 0' }}>Loading history...</div>
               ) : history.length === 0 ? (
-                <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', padding: '1rem 0', textAlign: 'center' }}>
+                <div style={{ fontSize: '0.8rem', padding: '1rem 0', textAlign: 'center' }}>
                   No recent runs found. Try launching the editor and running code!
                 </div>
               ) : (
                 history.map((run) => {
-                  const dateStr = new Date(run.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+                  const dateStr = new Date(run.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                   const isSuccess = run.exitCode === 0;
                   return (
                     <div 
                       key={run.runId} 
-                      className="history-item"
+                      className="history-item neomorphic-item-button"
+                      style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0.75rem 0.9rem', marginBottom: '0.6rem' }}
                       onClick={() => navigate('/runner', { state: { code: run.code } })}
                       title="Click to reload this script in the editor"
                     >
-                      <div className="history-item-left">
+                      <div className="history-item-left" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', minWidth: 0, flex: 1 }}>
                         <div className="status-icon-wrapper">
                           {isSuccess ? (
-                            <CheckCircle size={15} color="var(--success)" />
+                            <CheckCircle size={14} color="#10b981" />
                           ) : (
-                            <XCircle size={15} color="var(--error)" />
+                            <XCircle size={14} color="#ef4444" />
                           )}
                         </div>
-                        <div className="history-meta">
-                          <span className="history-code-preview">
-                            {run.code.trim().split('\n')[0] || 'untitled.py'}
-                          </span>
-                          <span className="history-time-info">{dateStr}</span>
-                        </div>
+                        <span className="history-code-preview" style={{ fontSize: '0.75rem', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', fontFamily: 'var(--font-mono)' }}>
+                          {run.code.trim().split('\n')[0] || 'untitled.py'}
+                        </span>
                       </div>
-                      <div className="history-item-right">
-                        <Clock size={12} />
+                      <div className="history-item-right" style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--neo-text-muted)' }}>
+                        <Clock size={11} />
                         <span>{run.executionTimeMs}ms</span>
+                        <span style={{ fontSize: '0.7rem', opacity: 0.8 }}>{dateStr}</span>
                       </div>
                     </div>
                   );
                 })
               )}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Right Pane: Code Canvas & Ambient Glow */}
+      <div className="right-pane">
+        {/* Rotating Mesh Glow */}
+        <div className="mesh-gradient-glow"></div>
+
+        {/* Neumorphic Preview Canvas Card */}
+        <div className="neomorphic-canvas animate-fade-in">
+          <div className="code-preview-card">
+            <div className="code-preview-header">
+              <div className="dots">
+                <span className="dot dot-red"></span>
+                <span className="dot dot-yellow"></span>
+                <span className="dot dot-green"></span>
+              </div>
+              <span className="preview-title">preview</span>
+            </div>
+            <div className="code-preview-body">
+              <pre style={{ margin: 0, padding: 0, background: 'transparent', color: '#e2e8f0', fontFamily: 'var(--font-mono)', whiteSpace: 'pre-wrap', fontSize: '0.825rem', lineHeight: '1.6' }}>
+                <code>{highlightPython(recentCode)}</code>
+              </pre>
             </div>
           </div>
         </div>

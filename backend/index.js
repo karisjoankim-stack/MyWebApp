@@ -89,7 +89,7 @@ app.post('/api/run', async (req, res) => {
 });
 
 app.get('/api/packages', async (req, res) => {
-  const packages = ['numpy', 'pandas', 'matplotlib', 'PIL', 'scipy', 'sklearn', 'requests'];
+  const packages = ['numpy', 'pandas', 'matplotlib', 'PIL', 'scipy', 'sklearn', 'requests', 'phetk', 'statsmodels'];
   const status = {};
   
   const checkPackage = (pkg) => {
@@ -207,7 +207,7 @@ app.get('/api/recent-code', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
   console.log(`Backend server running on http://localhost:${PORT}`);
 });

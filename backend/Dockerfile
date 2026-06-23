@@ -17,7 +17,9 @@ RUN pip install --no-cache-dir \
     pillow \
     scipy \
     scikit-learn \
-    requests
+    requests \
+    phetk \
+    statsmodels
 
 WORKDIR /app
 
@@ -28,6 +30,6 @@ RUN npm install
 # Copy application files
 COPY . .
 
-EXPOSE 3001
+EXPOSE 3002
 
 CMD ["node", "index.js"]

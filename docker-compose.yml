@@ -6,20 +6,20 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "3001:3001"
+      - "3002:3002"
     volumes:
       - ./backend:/app
       - /app/node_modules
       - /app/runs
     environment:
-      - PORT=3001
+      - PORT=3002
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "5173:5173"
+      - "5180:5180"
     volumes:
       - ./frontend:/app
       - /app/node_modules

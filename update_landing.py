@@ -13,7 +13,7 @@ new_state_effect = """export default function LandingPage() {
   const [recentCode, setRecentCode] = useState('Loading...');
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/recent-code')
+    fetch('http://localhost:3002/api/recent-code')
       .then(res => res.json())
       .then(data => setRecentCode(data.code))
       .catch(err => setRecentCode('# Failed to load recent code'));

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.2.0] - 2026-06-23
+
+### Added
+- **Neomorphic UI Redesign**: Restructured the landing page into a clean split-pane design using soft Neomorphic extruded/sunken cards, pill buttons, and a rotating desaturated mesh gradient backdrop glow.
+- **PheTK Interactive Workspace**: Added a dedicated `/phetk` workspace route pre-configured with genetic association analysis, simulated studies, and custom Manhattan plots.
+- **Dockerized Dependencies**: Integrated `phetk` and `statsmodels` inside the containerized backend environment.
+- **Environment Package Checking**: Added support for monitoring `phetk` and `statsmodels` libraries in the sidebar package status panel.
+
 ## [0.1.0] - 2026-06-15
 
 ### Added
