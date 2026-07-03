@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.3.0] - 2026-07-03
+
+### Added
+- **Step-by-Step Modular Pipeline UI**: Completely refactored the PheTK analysis workspace into a 4-step wizard (Data & Config, Mapping, Statistics, Visualization).
+- **Python Execution CLI (`phetk_pipeline.py`)**: Designed a decoupled modular CLI script running individual tasks (ICD-to-Phecode translation, statistical regression, Manhattan plotting) with single-line JSON summary outputs.
+- **Dynamic Configuration Dropdowns**: Added auto-detection and custom mapping selections for patient identifiers, ICD code columns, vocabulary IDs, date columns, genotype variables of interest, and sex covariates.
+- **Sortable & Paginated Results Table**: Added a neomorphic-themed interactive table to inspect statistical findings on the fly.
+- **Run Directory Pruning (Cleanup)**: Added a "Delete Run" feature to clean up files under `backend/runs/<runId>` recursively from local disks.
+
+### Fixed
+- **Large Dataset Payload Limit**: Increased Express JSON body parser and URL-encoded limits to **50MB** to allow uploading large sample files (like 10% Kaggle EHR data) without triggering HTTP `413` errors.
+- **Sex Variable Naming Mismatch**: Fixed statistical regression KeyErrors caused by case discrepancies when aligning sex variables during regression fitting.
+
 ## [0.2.1] - 2026-06-23
 
 ### Security
