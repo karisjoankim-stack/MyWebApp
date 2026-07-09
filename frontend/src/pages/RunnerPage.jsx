@@ -146,7 +146,15 @@ export default function RunnerPage() {
     <div className="runner-layout">
       {/* Primary Icon Sidebar */}
       <div className="sidebar">
-        <div className="sidebar-icon active-brand" onClick={() => navigate('/')} title="Go back to Home">
+        <div 
+          className="sidebar-icon active-brand" 
+          onClick={() => navigate('/home')} 
+          title="Go back to Dashboard"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate('/home'); }}
+          aria-label="Go back to Dashboard"
+        >
           <Home size={22} />
         </div>
         <div 

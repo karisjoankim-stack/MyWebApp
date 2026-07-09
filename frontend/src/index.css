@@ -1417,3 +1417,320 @@ a {
 .runner-layout .media-name {
   color: var(--neo-text-dark);
 }
+
+/* ==========================================================================
+   Welcome Landing Page Styles (Python Runner Restructure)
+   ========================================================================== */
+
+.landing-layout-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--neo-bg);
+  color: var(--neo-text-dark);
+  font-family: var(--font-family);
+}
+
+.landing-bg-glow-top {
+  position: absolute;
+  top: -10%;
+  left: 10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(0, 210, 255, 0.12) 0%, rgba(240, 243, 246, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(50px);
+}
+
+.landing-bg-glow-bottom {
+  position: absolute;
+  bottom: -10%;
+  right: 10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(240, 243, 246, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(50px);
+}
+
+.landing-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(163, 177, 198, 0.3);
+  background: rgba(240, 243, 246, 0.8);
+}
+
+.landing-nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.1rem 2rem;
+}
+
+.brand-logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.brand-logo-area:hover {
+  transform: scale(1.02);
+}
+
+.landing-nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link-btn {
+  background: transparent;
+  border: none;
+  color: var(--neo-text-muted);
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+}
+
+.nav-link-btn:hover {
+  color: var(--neo-text-dark);
+  background: rgba(163, 177, 198, 0.15);
+}
+
+.nav-link-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+.landing-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  z-index: 1;
+  width: 100%;
+}
+
+.landing-hero {
+  margin-bottom: 4.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing-title {
+  font-size: 3.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.5rem;
+  color: var(--neo-text-dark);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #0099ff 0%, #00bfff 55%, #10b981 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.landing-subtitle {
+  font-size: 1.25rem;
+  color: var(--neo-text-muted);
+  max-width: 780px;
+  line-height: 1.6;
+  margin-bottom: 3rem;
+  font-weight: 400;
+}
+
+.hero-action-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-action-buttons .btn-primary {
+  padding: 0.8rem 1.8rem;
+  font-size: 1rem;
+  border-radius: 30px;
+  background: #0f172a;
+  color: #ffffff;
+  box-shadow: 6px 6px 12px rgba(163, 177, 198, 0.35), -6px -6px 12px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.hero-action-buttons .btn-primary:hover {
+  transform: translateY(-2px);
+  background: #1e293b;
+  box-shadow: 8px 8px 16px rgba(163, 177, 198, 0.45), -8px -8px 16px rgba(255, 255, 255, 0.9);
+}
+
+.pillars-section {
+  width: 100%;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.pillar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 2.75rem;
+  border-radius: 1.25rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  min-height: 340px;
+  position: relative;
+  background: var(--neo-bg);
+  box-shadow: var(--neo-shadow-raised);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.pillar-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 12px 12px 24px rgba(163, 177, 198, 0.5), -12px -12px 24px rgba(255, 255, 255, 0.9);
+  border-color: rgba(163, 177, 198, 0.4);
+}
+
+.pillar-card:focus-within {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.4);
+}
+
+.pillar-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.pillar-icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 14px;
+  background: var(--neo-bg);
+  box-shadow: var(--neo-shadow-sunken);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.pillar-icon-wrapper.blue-glow {
+  border-color: rgba(59, 130, 246, 0.25);
+}
+
+.pillar-icon-wrapper.green-glow {
+  border-color: rgba(16, 185, 129, 0.25);
+}
+
+.pillar-title {
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--neo-text-dark);
+  letter-spacing: -0.01em;
+}
+
+.pillar-description {
+  font-size: 0.975rem;
+  color: var(--neo-text-muted);
+  line-height: 1.65;
+  margin-bottom: 2.25rem;
+  flex-grow: 1;
+}
+
+.pillar-action-btn {
+  background: transparent;
+  border: none;
+  color: #3b82f6;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.25rem 0;
+}
+
+.pillar-action-btn:hover {
+  color: #2563eb;
+  gap: 0.75rem;
+}
+
+.pillar-action-btn:focus-visible {
+  outline: 2px solid #3b82f6;
+  border-radius: 4px;
+}
+
+.landing-footer {
+  padding: 2.5rem;
+  text-align: center;
+  border-top: 1px solid rgba(163, 177, 198, 0.3);
+  width: 100%;
+  font-size: 0.85rem;
+  color: var(--neo-text-muted);
+  margin-top: auto;
+  z-index: 1;
+  background: rgba(240, 243, 246, 0.5);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 768px) {
+  .landing-title {
+    font-size: 2.75rem;
+  }
+  .landing-subtitle {
+    font-size: 1.05rem;
+  }
+  .pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .pillar-card {
+    padding: 2rem;
+    min-height: auto;
+  }
+  .landing-nav {
+    gap: 0.75rem;
+  }
+  .nav-link-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.85rem;
+  }
+}
+
+

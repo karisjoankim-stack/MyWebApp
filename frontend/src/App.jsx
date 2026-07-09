@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import LandingPage from './pages/LandingPage';
+import HomePage from './pages/HomePage';
 import RunnerPage from './pages/RunnerPage';
 import PheTKPage from './pages/PheTKPage';
 
@@ -9,6 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="/runner" element={<RunnerPage />} />
         <Route path="/phetk" element={<PheTKPage />} />
       </Routes>

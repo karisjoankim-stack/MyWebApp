@@ -378,7 +378,15 @@ export default function PheTKPage() {
     <div className="runner-layout" style={{ background: 'var(--neo-bg)', color: 'var(--neo-text-dark)' }}>
       {/* Primary Sidebar */}
       <div className="sidebar" style={{ background: '#e0e5ec', borderRight: '1px solid rgba(163, 177, 198, 0.4)' }}>
-        <div className="sidebar-icon" onClick={() => navigate('/')} title="Go back to Home">
+        <div 
+          className="sidebar-icon" 
+          onClick={() => navigate('/home')} 
+          title="Go back to Dashboard"
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') navigate('/home'); }}
+          aria-label="Go back to Dashboard"
+        >
           <Home size={22} color="var(--neo-text-muted)" />
         </div>
         <div 
